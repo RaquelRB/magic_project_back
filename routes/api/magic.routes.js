@@ -4,10 +4,27 @@ const { restart } = require('nodemon');
 const Card = require('../../models/Card');
 const router = express.Router();
 
+const axios = require('axios')
+
+const dataBase = () => {
+  axios.get('https://api.magicthegathering.io/v1/cards')
+  .then((result) => console.log(result.data))
+  .catch((err)=> console.log(err))
+}
+
 router.get('/', (req, res, next) => {
   Card.find()
   .then(cards => res.status(200).json(cards))
   .catch(err => res.status(500).json(err))
+})
+
+router.get('/allCards', (req, res, next) => {
+  console.log(dataBase())
+  
+  
+  // Card.find()
+  // .then(cards => res.status(200).json(cards))
+  // .catch(err => res.status(500).json(err))
 })
 
 // router.get('/:id', (req, res, next) => {
